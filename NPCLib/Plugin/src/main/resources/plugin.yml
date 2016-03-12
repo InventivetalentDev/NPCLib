@@ -1,0 +1,7 @@
+name: NPCLib
+main: de.inventivegames.npc.NPCLibPlugin
+author: inventivetalent
+version: ${project.version}
+
+depend: [PacketListenerApi]
+softdepend: [NickNamer]
