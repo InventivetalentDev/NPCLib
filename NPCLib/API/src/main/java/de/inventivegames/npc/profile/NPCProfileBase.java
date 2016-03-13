@@ -53,7 +53,7 @@ public class NPCProfileBase implements NPCProfile {
 			Object profile = NMSClass.classGameProfile.getConstructor(UUID.class, String.class).newInstance(Bukkit.getOfflinePlayer(name).getUniqueId(), name);
 			Object mcServer = NMSClass.nmsMinecraftServer.getDeclaredMethod("getServer").invoke(null);
 			Object sessionService = MinecraftServerFieldResolver.resolveByFirstType(NMSClass.nmMinecraftSessionService).get(mcServer);
-			NMSClass.nmMinecraftSessionService.getDeclaredMethod("fillProfileProperties", NMSClass.classGameProfile, boolean.class).invoke(sessionService, profile, true);
+			profile = NMSClass.nmMinecraftSessionService.getDeclaredMethod("fillProfileProperties", NMSClass.classGameProfile, boolean.class).invoke(sessionService, profile, true);
 			Object properties = NMSClass.classGameProfile.getDeclaredMethod("getProperties").invoke(profile);
 			Iterable iterable = (Iterable) NMSClass.comGoogleCommonCollectForwardingMultimap.getDeclaredMethod("get", Object.class).invoke(properties, (Object) "textures");
 			Iterator iterator = iterable.iterator();
