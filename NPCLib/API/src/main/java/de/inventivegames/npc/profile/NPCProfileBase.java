@@ -32,7 +32,7 @@ import de.inventivegames.npc.NPCLib;
 import de.inventivegames.npc.util.AccessUtil;
 import de.inventivegames.npc.util.NMSClass;
 import org.bukkit.Bukkit;
-import org.inventivetalent.reflection.minecraft.Minecraft;
+import org.inventivetalent.reflection.resolver.FieldResolver;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -40,6 +40,8 @@ import java.util.UUID;
 public class NPCProfileBase implements NPCProfile {
 
 	protected static Object SKIN_CACHE;
+
+	static FieldResolver MinecraftServerFieldResolver = new FieldResolver(NMSClass.nmsMinecraftServer);
 
 	@SuppressWarnings({
 			"rawtypes",
@@ -50,7 +52,7 @@ public class NPCProfileBase implements NPCProfile {
 		try {
 			Object profile = NMSClass.classGameProfile.getConstructor(UUID.class, String.class).newInstance(Bukkit.getOfflinePlayer(name).getUniqueId(), name);
 			Object mcServer = NMSClass.nmsMinecraftServer.getDeclaredMethod("getServer").invoke(null);
-			Object sessionService = NMSClass.nmsMinecraftServer.getDeclaredMethod(Minecraft.VERSION.olderThan(Minecraft.Version.v1_8_R1) ? "av" : NPCLib.getServerVersion() <= 181 ? "aB" : NPCLib.getServerVersion() <= 182 ? "aC" : NPCLib.getServerVersion() <= 183 ? "aD" : "av").invoke(mcServer);
+			Object sessionService = MinecraftServerFieldResolver.resolveByFirstType(NMSClass.nmMinecraftSessionService).get(mcServer);
 			NMSClass.nmMinecraftSessionService.getDeclaredMethod("fillProfileProperties", NMSClass.classGameProfile, boolean.class).invoke(sessionService, profile, true);
 			Object properties = NMSClass.classGameProfile.getDeclaredMethod("getProperties").invoke(profile);
 			Iterable iterable = (Iterable) NMSClass.comGoogleCommonCollectForwardingMultimap.getDeclaredMethod("get", Object.class).invoke(properties, (Object) "textures");
