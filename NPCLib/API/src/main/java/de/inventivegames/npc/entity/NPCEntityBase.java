@@ -551,7 +551,7 @@ public abstract class NPCEntityBase implements NPC, NPCEntity {
 				cause = DamageCause.VOID;
 				break;
 			case "generic":
-//				System.out.println("generic");
+				//				System.out.println("generic");
 				cause = DamageCause.CUSTOM;// TODO
 				break;
 			case "magic":
@@ -570,14 +570,14 @@ public abstract class NPCEntityBase implements NPC, NPCEntity {
 				cause = DamageCause.THORNS;
 				break;
 			case "indirectMagic":// TODO Probably poison
-//				System.out.println("indirectMagic");
+				//				System.out.println("indirectMagic");
 				break;
 			case "fireball":
-//				System.out.println("fireball");
+				//				System.out.println("fireball");
 				cause = DamageCause.FIRE;// TODO
 				break;
 			case "thrown":
-//				System.out.println("thrown");
+				//				System.out.println("thrown");
 				cause = DamageCause.ENTITY_ATTACK;// TODO
 				break;
 			case "arrow":

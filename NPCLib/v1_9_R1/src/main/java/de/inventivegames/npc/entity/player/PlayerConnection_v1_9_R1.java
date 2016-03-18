@@ -26,90 +26,23 @@
  *  either expressed or implied, of anybody else.
  */
 
-package de.inventivegames.npc.channel;
+package de.inventivegames.npc.entity.player;
 
-import io.netty.channel.*;
+import de.inventivegames.npc.channel.ControllableChannel;
+import net.minecraft.server.v1_9_R1.*;
 
-import java.net.SocketAddress;
+public class PlayerConnection_v1_9_R1 extends PlayerConnection implements NPCPlayerConnection {
 
-public class NPCChannel_1_9 extends AbstractChannel implements ControllableChannel {
-
-	private final ChannelConfig config = new DefaultChannelConfig(this);
-
-	public NPCChannel_1_9() {
-		this(null);
-	}
-
-	public NPCChannel_1_9(Channel parent) {
-		super(parent);
+	public PlayerConnection_v1_9_R1(MinecraftServer minecraftserver, NetworkManager networkmanager, EntityPlayer entityplayer) {
+		super(minecraftserver, networkmanager, entityplayer);
 	}
 
 	@Override
-	public ChannelConfig config() {
-		this.config.setAutoRead(true);
-		return this.config;
+	public void sendPacket(Packet<?> packet) {
 	}
 
 	@Override
-	public boolean isActive() {
-		return false;
+	public ControllableChannel getControllableChannel() {
+		return (ControllableChannel) networkManager.channel;
 	}
-
-	boolean open=false;
-
-	@Override
-	public void setOpen(boolean open) {
-		this.open = open;
-	}
-
-	@Override
-	public boolean isOpen() {
-		return open;
-	}
-
-	@Override
-	public ChannelMetadata metadata() {
-		return null;
-	}
-
-	@Override
-	protected AbstractUnsafe newUnsafe() {
-		return null;
-	}
-
-	@Override
-	protected boolean isCompatible(EventLoop eventloop) {
-		return false;
-	}
-
-	@Override
-	protected SocketAddress localAddress0() {
-		return null;
-	}
-
-	@Override
-	protected SocketAddress remoteAddress0() {
-		return null;
-	}
-
-	@Override
-	protected void doBind(SocketAddress socketaddress) throws Exception {
-	}
-
-	@Override
-	protected void doDisconnect() throws Exception {
-	}
-
-	@Override
-	protected void doClose() throws Exception {
-	}
-
-	@Override
-	protected void doBeginRead() throws Exception {
-	}
-
-	@Override
-	protected void doWrite(ChannelOutboundBuffer channeloutboundbuffer) throws Exception {
-	}
-
 }

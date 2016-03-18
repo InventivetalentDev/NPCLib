@@ -30,6 +30,7 @@ package de.inventivegames.npc.entity.player;
 
 import de.inventivegames.npc.NPCLibPlugin;
 import de.inventivegames.npc.animation.NPCAnimation;
+import de.inventivegames.npc.channel.ControllableChannel;
 import de.inventivegames.npc.entity.NPCEntity;
 import de.inventivegames.npc.entity.NPCEntityBase;
 import de.inventivegames.npc.event.NPCSpawnEvent;
@@ -38,6 +39,7 @@ import de.inventivegames.npc.profile.NPCProfile;
 import de.inventivegames.npc.skin.Hand;
 import de.inventivegames.npc.skin.SkinLayer;
 import de.inventivegames.npc.util.*;
+import net.minecraft.server.v1_9_R1.EntityPlayer;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -208,6 +210,26 @@ public class NPCPlayerEntityBase extends NPCEntityBase implements NPCPlayer, NPC
 			}
 		});
 		super.despawn();
+	}
+
+	@Override
+	public void setLocation(Location location) {
+		ControllableChannel controllableChannel = null;
+		if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1)) {
+			//Let's hope this doesn't backfire at some point...
+			try {
+				Object connection = AccessUtil.setAccessible(NMSClass.nmsEntityPlayer.getDeclaredField("playerConnection")).get(this.theEntity);
+				Object networkManager = AccessUtil.setAccessible(NMSClass.nmsPlayerConnection.getDeclaredField("networkManager")).get(connection);
+				controllableChannel = (ControllableChannel) AccessUtil.setAccessible(NMSClass.nmsNetworkManager.getDeclaredField("channel")).get(networkManager);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			controllableChannel.setOpen(true);
+		}
+		this.getBukkitEntity().teleport(location);
+		if (controllableChannel != null) { controllableChannel.setOpen(false); }
+		setYaw(location.getYaw());
+		setPitch(location.getPitch());
 	}
 
 	/*

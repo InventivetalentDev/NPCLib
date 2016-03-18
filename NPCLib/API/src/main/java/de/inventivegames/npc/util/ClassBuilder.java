@@ -41,13 +41,17 @@ import java.util.List;
 public class ClassBuilder {
 
 	public static Object buildPlayerConnection(Object networkManager, Object entity) throws Exception {
-		final Object playerConnection = Reflection.getNMSClass("PlayerConnection").getConstructor(Reflection.getNMSClass("MinecraftServer"), networkManager.getClass(), Reflection.getNMSClass("EntityPlayer")).newInstance(Reflection.getMethod(Bukkit.getServer().getClass(), "getServer").invoke(Bukkit.getServer()), networkManager, entity);
-		if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_8_R1)) {
+		if(Minecraft.VERSION.olderThan(Minecraft.Version.v1_9_R1)) {
+			final Object playerConnection = Reflection.getNMSClass("PlayerConnection").getConstructor(Reflection.getNMSClass("MinecraftServer"), networkManager.getClass(), Reflection.getNMSClass("EntityPlayer")).newInstance(Reflection.getMethod(Bukkit.getServer().getClass(), "getServer").invoke(Bukkit.getServer()), networkManager, entity);
+			if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_8_R1)) {
+				NetworkManagermMethodResolver.resolve(new ResolverQuery("a", PacketListener), new ResolverQuery("setPacketListener", PacketListener)).invoke(networkManager, playerConnection);
+			}
+			return playerConnection;
+		}else{
+			Object playerConnection = Class.forName("de.inventivegames.npc.entity.player.PlayerConnection_" + Minecraft.VERSION.name()).getConstructor(Reflection.getNMSClass("MinecraftServer"), networkManager.getClass(), Reflection.getNMSClass("EntityPlayer")).newInstance(Reflection.getMethod(Bukkit.getServer().getClass(), "getServer").invoke(Bukkit.getServer()), networkManager, entity);
 			NetworkManagermMethodResolver.resolve(new ResolverQuery("a", PacketListener), new ResolverQuery("setPacketListener", PacketListener)).invoke(networkManager, playerConnection);
-			//			networkManager.getClass().getDeclaredMethod("a", Reflection.getNMSClass("PacketListener")).invoke(networkManager, playerConnection);
+			return playerConnection;
 		}
-
-		return playerConnection;
 	}
 
 	public static Object buildNetworkManager(boolean clientBound) throws Exception {
@@ -63,7 +67,7 @@ public class ClassBuilder {
 		//		Field addressField = AccessUtil.setAccessible(Reflection.getNMSClass("NetworkManager").getDeclaredField(Minecraft.VERSION.olderThan(Minecraft.Version.v1_8_R1) ? "n" : NPCLib.getServerVersion() > 181 ? "l" : "j"));
 		Field addressField = NetworkManagerFieldResolver.resolveByFirstType(SocketAddress.class);
 
-		Object parentChannel = (Minecraft.VERSION.olderThan(Minecraft.Version.v1_8_R1) ? Class.forName("de.inventivegames.npc.channel.NPCChannel_1_7") : Class.forName("de.inventivegames.npc.channel.NPCChannel_1_8")).newInstance();
+		Object parentChannel = (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1) ? Class.forName("de.inventivegames.npc.channel.NPCChannel_1_9") : Minecraft.VERSION.olderThan(Minecraft.Version.v1_8_R1) ? Class.forName("de.inventivegames.npc.channel.NPCChannel_1_7") : Class.forName("de.inventivegames.npc.channel.NPCChannel_1_8")).newInstance();
 
 		try {
 			Field protocolVersionField = Reflection.getNMSClass("NetworkManager").getDeclaredField(Minecraft.VERSION.olderThan(Minecraft.Version.v1_8_R1) ? "protocolVersion" : "c");

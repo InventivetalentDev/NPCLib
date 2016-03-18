@@ -76,6 +76,8 @@ public class NMSClass {
 	public static Class<?> comGoogleCommonCollectForwardingMultimap;
 	public static Class<?> comGoogleCommonCacheLoadingCache;
 
+	public static Class<?> nmsNetworkManager;
+
 	protected static Field nmsFieldPlayerConnection;
 	protected static Field nmsFieldNetworkManager;
 	protected static Field nmsFieldNetworkManagerI;
@@ -101,16 +103,16 @@ public class NMSClass {
 				nmsWorldServer = Reflection.getNMSClass("WorldServer");
 				nmsWorld = Reflection.getNMSClass("World");
 				nmsPlayerInteractManager = Reflection.getNMSClass("PlayerInteractManager");
-//				try {
-//					nmsEnumGamemode = Reflection.getNMSClassWithException("EnumGamemode");
-//				} catch (Exception e1) {
-//					nmsEnumGamemode = Reflection.getNMSClass("WorldSettings$EnumGamemode");
-//				}
+				//				try {
+				//					nmsEnumGamemode = Reflection.getNMSClassWithException("EnumGamemode");
+				//				} catch (Exception e1) {
+				//					nmsEnumGamemode = Reflection.getNMSClass("WorldSettings$EnumGamemode");
+				//				}
 				nmsEnumGamemode = nmsClassResolver.resolve("EnumGamemode", "WorldSettings$EnumGamemode");
 				nmsPlayerConnection = Reflection.getNMSClass("PlayerConnection");
 				nmsPathfinder = Reflection.getNMSClass("Pathfinder");
 				nmsDataWatcher = Reflection.getNMSClass("DataWatcher");
-//				nmsWatchableObject = Reflection.getVersion().contains("1_7") || Reflection.getVersion().contains("1_8_R1") ? Reflection.getNMSClass("WatchableObject") : Reflection.getNMSClass("DataWatcher$WatchableObject");
+				//				nmsWatchableObject = Reflection.getVersion().contains("1_7") || Reflection.getVersion().contains("1_8_R1") ? Reflection.getNMSClass("WatchableObject") : Reflection.getNMSClass("DataWatcher$WatchableObject");
 				nmsWatchableObject = nmsClassResolver.resolveSilent("WatchableObject", "DataWatcher$WatchableObject");//Ignore exceptions, since it's not available in 1.9
 				try {
 					nmsPathfinderAbstract = Reflection.getNMSClassWithException("PathfinderAbstract");
@@ -137,13 +139,15 @@ public class NMSClass {
 				comGoogleCommonCollectForwardingMultimap = ClassBuilder.getNMUtilClass("com.google.common.collect.ForwardingMultimap");
 				comGoogleCommonCacheLoadingCache = ClassBuilder.getNMUtilClass("com.google.common.cache.LoadingCache");
 
+				nmsNetworkManager = Reflection.getNMSClass("NetworkManager");
+
 				nmsFieldPlayerConnection = Reflection.getField(nmsEntityPlayer, "playerConnection");
 				nmsFieldNetworkManager = Reflection.getField(nmsPlayerConnection, "networkManager");
-				nmsFieldNetworkManagerI = Reflection.getField(nmsFieldNetworkManager.getType(), "i");
-				nmsFieldNetworkManagerM = Reflection.getField(nmsFieldNetworkManager.getType(), "m");
+				nmsFieldNetworkManagerI = Reflection.getField(nmsNetworkManager, "i");
+				nmsFieldNetworkManagerM = Reflection.getField(nmsNetworkManager, "m");
 
 				nmsSendPacket = Reflection.getMethod(nmsPlayerConnection, "sendPacket");
-				nmsNetworkGetVersion = Reflection.getMethod(nmsFieldNetworkManager.getType(), "getVersion", ioNettyChannel);
+				nmsNetworkGetVersion = Reflection.getMethod(nmsNetworkManager, "getVersion", ioNettyChannel);
 
 				initialited = true;
 			} catch (Exception e) {
