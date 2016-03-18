@@ -42,14 +42,18 @@ public class NPCProfile_v1_8 extends NPCProfileBase {
 
 	static {
 		if (SKIN_CACHE == null) {
-			SKIN_CACHE = CacheBuilder.newBuilder().expireAfterWrite(30L, TimeUnit.MINUTES).build(new CacheLoader<String, Property>() {
+			try {
+				SKIN_CACHE = CacheBuilder.class.getDeclaredMethod("build", CacheLoader.class).invoke(CacheBuilder.newBuilder().expireAfterWrite(30L, TimeUnit.MINUTES), new CacheLoader<String, Property>() {
 
-				@Override
-				public Property load(String arg0) throws Exception {
-					return (Property) loadSkin(arg0);
-				}
+					@Override
+					public Property load(String arg0) throws Exception {
+						return (Property) loadSkin(arg0);
+					}
 
-			});
+				});
+			} catch (ReflectiveOperationException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
