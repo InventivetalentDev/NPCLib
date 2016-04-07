@@ -38,10 +38,10 @@
     <version>parent</version>
 
     <properties>
-        <npclib.version>1.8.3</npclib.version>
-        <packetlistener.version>[3.2.0,)</packetlistener.version>
-        <nicknamer.version>[2.4.1,)</nicknamer.version>
-        <reflection.version>[1.2.2,)</reflection.version>
+        <npclib.version>1.8.4</npclib.version>
+        <packetlistener.version>[3.3.5,)</packetlistener.version>
+        <nicknamer.version>[3.0.0,)</nicknamer.version>
+        <reflection.version>[1.4.0,)</reflection.version>
     </properties>
 
     <build>
