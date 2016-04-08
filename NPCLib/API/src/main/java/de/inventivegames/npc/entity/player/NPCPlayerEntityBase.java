@@ -39,7 +39,6 @@ import de.inventivegames.npc.profile.NPCProfile;
 import de.inventivegames.npc.skin.Hand;
 import de.inventivegames.npc.skin.SkinLayer;
 import de.inventivegames.npc.util.*;
-import net.minecraft.server.v1_9_R1.EntityPlayer;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -192,6 +191,7 @@ public class NPCPlayerEntityBase extends NPCEntityBase implements NPCPlayer, NPC
 
 	@Override
 	public void despawn() {
+		if (getBukkitEntity().isDead()) { return; }
 		Bukkit.getScheduler().runTask(NPCLibPlugin.getInstance(), new Runnable() {
 			@Override
 			public void run() {
