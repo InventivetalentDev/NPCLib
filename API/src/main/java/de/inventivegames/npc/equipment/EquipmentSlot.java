@@ -67,4 +67,12 @@ public enum EquipmentSlot {
 		}
 	}
 
+	public Object toNMS() {
+		if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1)) {
+			return de.inventivegames.npc.util.Reflection.getNMSClass("EnumItemSlot").getEnumConstants()[this.id];
+		} else {
+			return null;
+		}
+	}
+
 }
