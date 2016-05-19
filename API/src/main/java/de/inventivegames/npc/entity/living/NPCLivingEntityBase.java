@@ -31,13 +31,13 @@ package de.inventivegames.npc.entity.living;
 import de.inventivegames.npc.NPCLib;
 import de.inventivegames.npc.entity.NPCEntityBase;
 import de.inventivegames.npc.event.NPCSpawnEvent;
-import de.inventivegames.npc.util.AccessUtil;
 import de.inventivegames.npc.util.NMSClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.inventivetalent.reflection.minecraft.Minecraft;
+import org.inventivetalent.reflection.util.AccessUtil;
 
 import java.util.UUID;
 

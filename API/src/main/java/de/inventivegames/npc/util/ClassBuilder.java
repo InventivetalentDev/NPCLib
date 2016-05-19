@@ -33,6 +33,7 @@ import org.inventivetalent.reflection.minecraft.Minecraft;
 import org.inventivetalent.reflection.resolver.FieldResolver;
 import org.inventivetalent.reflection.resolver.MethodResolver;
 import org.inventivetalent.reflection.resolver.ResolverQuery;
+import org.inventivetalent.reflection.util.AccessUtil;
 
 import java.lang.reflect.Field;
 import java.net.SocketAddress;

@@ -29,10 +29,10 @@
 package de.inventivegames.npc.entity.insentient;
 
 import de.inventivegames.npc.entity.living.NPCLivingEntityBase;
-import de.inventivegames.npc.util.AccessUtil;
 import de.inventivegames.npc.util.NMSClass;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.inventivetalent.reflection.util.AccessUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -31,7 +31,6 @@ package de.inventivegames.npc;
 import de.inventivegames.npc.entity.NPCEntityNMS;
 import de.inventivegames.npc.profile.NPCProfile;
 import de.inventivegames.npc.profile.NPCProfileBase;
-import de.inventivegames.npc.util.AccessUtil;
 import de.inventivegames.npc.util.ClassBuilder;
 import de.inventivegames.npc.util.NMSClass;
 import de.inventivegames.npc.util.Reflection;
@@ -41,6 +40,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.inventivetalent.reflection.util.AccessUtil;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

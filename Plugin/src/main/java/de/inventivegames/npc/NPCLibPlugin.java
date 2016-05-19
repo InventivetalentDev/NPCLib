@@ -32,7 +32,6 @@ import de.inventivegames.npc.NPCLib.NPCType;
 import de.inventivegames.npc.entity.NPCEntity;
 import de.inventivegames.npc.entity.NPCEntityBase;
 import de.inventivegames.npc.event.NPCInteractEvent.InteractType;
-import de.inventivegames.npc.util.AccessUtil;
 import de.inventivegames.npc.util.NMSClass;
 import de.inventivegames.npc.util.Reflection;
 import de.inventivegames.packetlistener.handler.PacketHandler;

@@ -29,10 +29,10 @@
 package de.inventivegames.npc.profile;
 
 import de.inventivegames.npc.NPCLib;
-import de.inventivegames.npc.util.AccessUtil;
 import de.inventivegames.npc.util.NMSClass;
 import org.bukkit.Bukkit;
 import org.inventivetalent.reflection.resolver.FieldResolver;
+import org.inventivetalent.reflection.util.AccessUtil;
 
 import java.util.Iterator;
 import java.util.UUID;

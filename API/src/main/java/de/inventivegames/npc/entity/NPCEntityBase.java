@@ -37,7 +37,10 @@ import de.inventivegames.npc.equipment.EquipmentSlot;
 import de.inventivegames.npc.event.*;
 import de.inventivegames.npc.living.NPCPlayer;
 import de.inventivegames.npc.path.NPCPath;
-import de.inventivegames.npc.util.*;
+import de.inventivegames.npc.util.ClassBuilder;
+import de.inventivegames.npc.util.NMSClass;
+import de.inventivegames.npc.util.NMSUtil;
+import de.inventivegames.npc.util.Reflection;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -48,6 +51,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.inventivetalent.reflection.minecraft.Minecraft;
+import org.inventivetalent.reflection.util.AccessUtil;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -93,6 +97,8 @@ public abstract class NPCEntityBase implements NPC, NPCEntity {
 	 *
 	 * @param world    {@link World} to spawn the entity in
 	 * @param location {@link Location} to spawn the entity at
+	 * @throws IllegalArgumentException if one of the arguments is null
+	 * @throws Exception                when initializing the class fails
 	 */
 	public NPCEntityBase(@Nonnull org.bukkit.World world, @Nonnull Location location) throws Exception {
 		if (world == null || location == null) { throw new IllegalArgumentException("None of the arguments must be null!"); }

@@ -38,12 +38,16 @@ import de.inventivegames.npc.living.NPCPlayer;
 import de.inventivegames.npc.profile.NPCProfile;
 import de.inventivegames.npc.skin.Hand;
 import de.inventivegames.npc.skin.SkinLayer;
-import de.inventivegames.npc.util.*;
+import de.inventivegames.npc.util.ClassBuilder;
+import de.inventivegames.npc.util.NMSClass;
+import de.inventivegames.npc.util.PlayerUtil;
+import de.inventivegames.npc.util.Reflection;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.reflection.minecraft.DataWatcher;
 import org.inventivetalent.reflection.minecraft.Minecraft;
+import org.inventivetalent.reflection.util.AccessUtil;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -68,6 +72,8 @@ public class NPCPlayerEntityBase extends NPCEntityBase implements NPCPlayer, NPC
 	 * @param world    {@link World} to spawn the entity in
 	 * @param location {@link Location} to spawn the entity at
 	 * @param profile  GameProfile to be assigned to the entity
+	 * @throws IllegalArgumentException if one of the arguments is null
+	 * @throws Exception                when initializing the class fails
 	 */
 	public NPCPlayerEntityBase(@Nonnull org.bukkit.World world, @Nonnull Location location, @Nonnull NPCProfile profile) throws Exception {
 		super(world, location);
