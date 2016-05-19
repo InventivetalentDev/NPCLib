@@ -47,7 +47,7 @@ public enum EquipmentSlot {
 	}
 
 	public int getID() {
-		if (Minecraft.VERSION.olderThan(Minecraft.Version.v1_9_R1)) {
+		if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1)) {
 			return this.id;
 		} else {
 			switch (this) {
