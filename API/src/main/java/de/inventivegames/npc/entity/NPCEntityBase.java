@@ -54,6 +54,7 @@ import org.inventivetalent.reflection.minecraft.Minecraft;
 import org.inventivetalent.reflection.util.AccessUtil;
 
 import javax.annotation.Nonnull;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -445,7 +446,16 @@ public abstract class NPCEntityBase implements NPC, NPCEntity {
 		if (nmsSlot != null) {
 			try {
 				Object nmsItemStack = NMSClass.obcCraftItemStack.getMethod("asNMSCopy", ItemStack.class).invoke(null, item);
-				Object packet = Reflection.getNMSClass("PacketPlayOutEntityEquipment").getConstructor(int.class, Reflection.getNMSClass("EnumItemSlot"), Reflection.getNMSClass("ItemStack")).newInstance(getEntityID(), nmsSlot, nmsItemStack);
+
+				Constructor constructor;
+				if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1)) {
+					constructor = Reflection.getNMSClass("PacketPlayOutEntityEquipment").getConstructor(int.class, Reflection.getNMSClass("EnumItemSlot"), Reflection.getNMSClass("ItemStack"));
+				} else if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_8_R1)) {
+					constructor = Reflection.getNMSClass("PacketPlayOutEntityEquipment").getConstructor(int.class, int.class, Reflection.getNMSClass("ItemStack"));
+				} else {
+					return;
+				}
+				Object packet = constructor.newInstance(getEntityID(), nmsSlot, nmsItemStack);
 				for (Player player : getLocation().getWorld().getPlayers()) {
 					try {
 						sendPacket(player, packet);
