@@ -43,6 +43,7 @@ public class NPCVillagerEntityBase extends NPCInsentientEntityBase implements NP
 	 *
 	 * @param world    {@link World} to spawn the entity in
 	 * @param location {@link Location} to spawn the entity at
+	 * @throws Exception if initializing fails
 	 */
 	public NPCVillagerEntityBase(@Nonnull World world, @Nonnull Location location) throws Exception {
 		super(world, location);

@@ -41,12 +41,6 @@ import javax.annotation.Nonnull;
 
 public class NPCVillagerEntity_v1_7_R4 extends NPCVillagerEntityBase {
 
-	/**
-	 * Base NPC entity which can be normally spawned but does not override any NMS Entity methods and can therefore be damaged etc.
-	 *
-	 * @param world    {@link World} to spawn the entity in
-	 * @param location {@link Location} to spawn the entity at
-	 */
 	public NPCVillagerEntity_v1_7_R4(@Nonnull World world, @Nonnull Location location) throws Exception {
 		super(world, location);
 
