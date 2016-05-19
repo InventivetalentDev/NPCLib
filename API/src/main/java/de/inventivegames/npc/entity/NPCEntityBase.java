@@ -414,6 +414,18 @@ public abstract class NPCEntityBase implements NPC, NPCEntity {
 			case HAND:
 				this.getBukkitEntity().getEquipment().setItemInHand(item);
 				break;
+			case MAIN_HAND:
+				if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1)) {
+					this.getBukkitEntity().getEquipment().setItemInMainHand(item);
+				} else {
+					this.getBukkitEntity().getEquipment().setItemInHand(item);
+				}
+				break;
+			case OFF_HAND:
+				if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1)) {
+					this.getBukkitEntity().getEquipment().setItemInOffHand(item);
+				}
+				break;
 			case FEET:
 				this.getBukkitEntity().getEquipment().setBoots(item);
 				break;
@@ -429,6 +441,22 @@ public abstract class NPCEntityBase implements NPC, NPCEntity {
 			default:
 				break;
 		}
+		Object nmsSlot = slot.toNMS();
+		if (nmsSlot != null) {
+			try {
+				Object nmsItemStack = NMSClass.obcCraftItemStack.getMethod("asNMSCopy", ItemStack.class).invoke(null, item);
+				Object packet = Reflection.getNMSClass("PacketPlayOutEntityEquipment").getConstructor(int.class, Reflection.getNMSClass("EnumItemSlot"), Reflection.getNMSClass("ItemStack")).newInstance(getEntityID(), nmsSlot, nmsItemStack);
+				for (Player player : getLocation().getWorld().getPlayers()) {
+					try {
+						sendPacket(player, packet);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 
 	@Override
@@ -436,6 +464,18 @@ public abstract class NPCEntityBase implements NPC, NPCEntity {
 		switch (slot) {
 			case HAND:
 				return this.getBukkitEntity().getEquipment().getItemInHand();
+			case MAIN_HAND:
+				if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1)) {
+					return this.getBukkitEntity().getEquipment().getItemInMainHand();
+				} else {
+					return this.getBukkitEntity().getEquipment().getItemInHand();
+				}
+			case OFF_HAND:
+				if (Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1)) {
+					return this.getBukkitEntity().getEquipment().getItemInOffHand();
+				} else {
+					return null;
+				}
 			case FEET:
 				return this.getBukkitEntity().getEquipment().getBoots();
 			case LEGS:
