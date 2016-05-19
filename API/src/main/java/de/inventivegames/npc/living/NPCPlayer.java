@@ -42,43 +42,37 @@ public interface NPCPlayer extends NPC {
 	/**
 	 * @param mode The {@link GameMode} of the entity
 	 */
-	@Override
 	public void setGameMode(GameMode mode);
 
 	/**
 	 * @return The {@link GameMode} of the entity
 	 */
-	@Override
 	public GameMode getGameMode();
 
 	/**
 	 * @param flag <code>true</code> if the player should be show in the player list
 	 */
-	@Override
 	public void setShownInList(boolean flag);
 
 	/**
 	 * @return <code>true</code> if the player is shown in the player list
 	 */
-	@Override
 	public boolean isShownInList();
 
 	/**
 	 * @param ping new ping of the player
 	 */
-	@Override
 	public void setPing(int ping);
 
 	/**
 	 * @return ping if the player (not the actual ping)
 	 */
-	@Override
 	public int getPing();
 
 	/**
 	 * Updates the visible skin layers
 	 *
-	 * @param active {@link de.inventivegames.npc.skin.SkinLayer} array of all visible layers
+	 * @param layers {@link de.inventivegames.npc.skin.SkinLayer} array of all visible layers
 	 */
 	public void setSkinLayers(SkinLayer... layers);
 
@@ -92,13 +86,11 @@ public interface NPCPlayer extends NPC {
 	/**
 	 * @param flag <code>true</code> if the entity should be lying (sleeping)
 	 */
-	@Override
 	public void setLying(boolean flag);
 
 	/**
 	 * @return <code>true</code> if the entity is lying (sleeping)
 	 */
-	@Override
 	public boolean isLying();
 
 }
