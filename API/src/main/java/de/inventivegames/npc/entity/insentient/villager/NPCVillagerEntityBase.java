@@ -30,7 +30,6 @@ package de.inventivegames.npc.entity.insentient.villager;
 
 import de.inventivegames.npc.entity.insentient.NPCInsentientEntityBase;
 import de.inventivegames.npc.living.NPCVillager;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Villager;
@@ -84,51 +83,4 @@ public class NPCVillagerEntityBase extends NPCInsentientEntityBase implements NP
 		return this.getBukkitEntity().getProfession();
 	}
 
-	@Override
-	@Deprecated
-	public void setGameMode(GameMode mode) {
-		throw new UnsupportedOperationException("This method is not supported in this class");
-	}
-
-	@Override
-	@Deprecated
-	public GameMode getGameMode() {
-		throw new UnsupportedOperationException("This method is not supported in this class");
-	}
-
-	@Override
-	@Deprecated
-	public void setLying(boolean flag) {
-		throw new UnsupportedOperationException("This method is not supported in this class");
-	}
-
-	@Override
-	@Deprecated
-	public boolean isLying() {
-		throw new UnsupportedOperationException("This method is not supported in this class");
-	}
-
-	@Override
-	@Deprecated
-	public void setShownInList(boolean flag) {
-		throw new UnsupportedOperationException("This method is not supported in this class");
-	}
-
-	@Override
-	@Deprecated
-	public boolean isShownInList() {
-		throw new UnsupportedOperationException("This method is not supported in this class");
-	}
-
-	@Override
-	@Deprecated
-	public void setPing(int ping) {
-		throw new UnsupportedOperationException("This method is not supported in this class");
-	}
-
-	@Override
-	@Deprecated
-	public int getPing() {
-		throw new UnsupportedOperationException("This method is not supported in this class");
-	}
 }
