@@ -32,7 +32,6 @@ import de.inventivegames.npc.ai.NPCAI;
 import de.inventivegames.npc.animation.NPCAnimation;
 import de.inventivegames.npc.equipment.EquipmentSlot;
 import de.inventivegames.npc.path.NPCPath;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -257,53 +256,4 @@ public interface NPC {
 	 */
 	public ItemStack getEquipment(EquipmentSlot slot);
 
-	/* Deprecated methods - moved to NPCPlayer */
-
-	/**
-	 * @deprecated Method has been moved to {@link de.inventivegames.npc.living.NPCPlayer}
-	 */
-	@Deprecated
-	public abstract void setGameMode(GameMode mode);
-
-	/**
-	 * @deprecated Method has been moved to {@link de.inventivegames.npc.living.NPCPlayer}
-	 */
-	@Deprecated
-	public abstract GameMode getGameMode();
-
-	/**
-	 * @deprecated Method has been moved to {@link de.inventivegames.npc.living.NPCPlayer}
-	 */
-	@Deprecated
-	public abstract void setLying(boolean flag);
-
-	/**
-	 * @deprecated Method has been moved to {@link de.inventivegames.npc.living.NPCPlayer}
-	 */
-	@Deprecated
-	public abstract boolean isLying();
-
-	/**
-	 * @deprecated Method has been moved to {@link de.inventivegames.npc.living.NPCPlayer}
-	 */
-	@Deprecated
-	public abstract void setShownInList(boolean flag);
-
-	/**
-	 * @deprecated Method has been moved to {@link de.inventivegames.npc.living.NPCPlayer}
-	 */
-	@Deprecated
-	public abstract boolean isShownInList();
-
-	/**
-	 * @deprecated Method has been moved to {@link de.inventivegames.npc.living.NPCPlayer}
-	 */
-	@Deprecated
-	public abstract void setPing(int ping);
-
-	/**
-	 * @deprecated Method has been moved to {@link de.inventivegames.npc.living.NPCPlayer}
-	 */
-	@Deprecated
-	public abstract int getPing();
 }
