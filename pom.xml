@@ -38,7 +38,7 @@
     <version>parent</version>
 
     <properties>
-        <npclib.version>1.8.6</npclib.version>
+        <npclib.version>1.8.7</npclib.version>
         <packetlistener.version>[3.3.5,)</packetlistener.version>
         <nicknamer.version>[3.0.0,)</nicknamer.version>
         <reflection.version>[1.4.0,)</reflection.version>
@@ -76,6 +76,8 @@
         <module>v1_8_R2</module>
         <module>v1_8_R3</module>
         <module>v1_9_R1</module>
+        <module>v1_9_R2</module>
+        <module>v1_10_R1</module>
         <module>Plugin</module>
     </modules>
     <repositories>

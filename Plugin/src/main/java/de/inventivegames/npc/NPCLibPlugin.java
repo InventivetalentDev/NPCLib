@@ -69,8 +69,17 @@ public class NPCLibPlugin extends JavaPlugin implements Listener {
 
 		this.getLogger().info("Server version is " + NPCLib.serverVersionString);
 
+		if (Reflection.getVersion().contains("1_10")) {
+			NPCLib.serverVersion = 200;
+		}
 		if (Reflection.getVersion().contains("1_9")) {
 			NPCLib.serverVersion = 190;
+		}
+		if (Reflection.getVersion().contains("1_9_R1")) {
+			NPCLib.serverVersion = 191;
+		}
+		if (Reflection.getVersion().contains("1_9_R2")) {
+			NPCLib.serverVersion = 192;
 		}
 		if (Reflection.getVersion().contains("1_8")) {
 			NPCLib.serverVersion = 180;
